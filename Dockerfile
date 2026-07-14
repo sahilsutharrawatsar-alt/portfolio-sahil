@@ -1,5 +1,6 @@
 FROM php:8.4-cli
 
+# System dependencies
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -9,12 +10,18 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    sqlite3 \
-    && docker-php-ext-install pdo pdo_mysql pdo_sqlite zip
+    libsqlite3-dev \
+    && docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    pdo_sqlite \
+    zip
 
+# Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs
 
+# Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
