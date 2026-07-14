@@ -45,14 +45,8 @@ RUN mkdir -p \
 # Set permissions
 RUN chmod -R 775 storage bootstrap/cache
 
-# Generate app key
-RUN php artisan key:generate --force
 
-# Cache configuration
-RUN php artisan config:clear
-RUN php artisan cache:clear
-RUN php artisan view:clear
-RUN php artisan route:clear
+
 
 EXPOSE 10000
 
