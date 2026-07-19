@@ -67,42 +67,14 @@
                     <a class="button button--ghost magnetic" href="#projects">Explore projects</a>
                 </div>
             </div>
-            <div class="hero-console hero-reveal" data-parallax="0.035">
-                <div class="console-glow"></div>
-                <div class="profile-signature-card">
-                    <div class="profile-monogram"><span>SS</span><i></i></div>
-                    <div>
-                        <strong>Sahil Suthar</strong>
-                        <span>PHP Laravel Developer</span>
-                    </div>
-                    <small>2.6+ YRS</small>
-                </div>
-                <div class="console-window">
-                    <div class="console-top">
-                        <div><i></i><i></i><i></i></div>
-                        <span>sahil.php</span>
-                        <b>● PROFILE</b>
-                    </div>
-                    <div class="console-code" aria-label="Developer profile code">
-                        <p><em>01</em><span class="code-violet">class</span> <span class="code-cyan">Developer</span> {</p>
-                        <p><em>02</em>&nbsp;&nbsp;<span class="code-muted">public</span> string <span class="code-green">$name</span> =</p>
-                        <p><em>03</em>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-gold">'Sahil Suthar'</span>;</p>
-                        <p><em>04</em></p>
-                        <p><em>05</em>&nbsp;&nbsp;<span class="code-muted">public</span> array <span class="code-green">$focus</span> = [</p>
-                        <p><em>06</em>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-gold">'Laravel'</span>, <span class="code-gold">'REST APIs'</span>,</p>
-                        <p><em>07</em>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-gold">'Business workflows'</span></p>
-                        <p><em>08</em>&nbsp;&nbsp;];</p>
-                        <p><em>09</em></p>
-                        <p><em>10</em>&nbsp;&nbsp;<span class="code-violet">return</span> <span class="code-cyan">$this</span>->build();</p>
-                        <p><em>11</em>}</p>
-                    </div>
-                    <div class="console-status">
-                        <span><i></i> Experience in production</span>
-                        <strong>Oct 2023 — May 2026</strong>
-                    </div>
-                </div>
-                <div class="floating-pill floating-pill--api">REST API<small>Connected</small></div>
-                <div class="floating-pill floating-pill--db">MySQL<small>Optimized</small></div>
+            <div class="hero-portrait hero-reveal" data-parallax="0.035" data-portrait-parallax>
+                <div class="portrait-halo" aria-hidden="true"></div>
+                <div class="portrait-glass" aria-hidden="true"></div>
+                <div class="portrait-aura portrait-aura--cyan" aria-hidden="true"></div>
+                <div class="portrait-aura portrait-aura--violet" aria-hidden="true"></div>
+                <figure class="portrait-figure">
+                    <img src="{{ asset('assets/images/hero-portrait.png') }}" alt="Portrait of Sahil Suthar">
+                </figure>
             </div>
         </div>
         <div class="hero-bottom container">

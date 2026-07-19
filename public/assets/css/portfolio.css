@@ -111,6 +111,109 @@ svg { display: block; fill: none; stroke: currentColor; stroke-linecap: round; s
 .button--ghost { background: rgba(255,255,255,.025); }
 .button--ghost:hover { border-color: rgba(0,229,255,.55); background: rgba(0,229,255,.05); }
 
+.hero-portrait {
+    --portrait-x: 0px;
+    --portrait-y: 0px;
+    --portrait-tilt-x: 0deg;
+    --portrait-tilt-y: 0deg;
+    position: relative;
+    min-height: 39rem;
+    display: grid;
+    place-items: center;
+    perspective: 1200px;
+    isolation: isolate;
+}
+.portrait-halo {
+    position: absolute;
+    z-index: 0;
+    width: min(34rem, 86%);
+    aspect-ratio: 1;
+    border-radius: 44% 56% 58% 42% / 50% 42% 58% 50%;
+    background:
+        radial-gradient(circle at 52% 38%, rgba(210,246,255,.34), transparent 0 18%, rgba(0,229,255,.2) 29%, transparent 58%),
+        radial-gradient(circle at 35% 66%, rgba(139,92,246,.3), transparent 54%);
+    filter: blur(20px) saturate(1.2);
+    opacity: .9;
+    transform: translate3d(calc(var(--portrait-x) * -.45), calc(var(--portrait-y) * -.45), -70px);
+    animation: portraitHalo 8s ease-in-out infinite alternate;
+}
+.portrait-glass {
+    position: absolute;
+    z-index: 1;
+    width: min(31rem, 78%);
+    aspect-ratio: .78;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 36% 64% 47% 53% / 42% 40% 60% 58%;
+    background:
+        linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.035) 38%, rgba(0,229,255,.045)),
+        radial-gradient(circle at 62% 16%, rgba(255,255,255,.18), transparent 33%);
+    box-shadow:
+        0 38px 110px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.22),
+        inset 0 -35px 90px rgba(139,92,246,.08),
+        0 0 70px rgba(0,229,255,.08);
+    backdrop-filter: blur(18px);
+    clip-path: polygon(49% 0, 72% 5%, 92% 19%, 100% 47%, 91% 81%, 68% 99%, 31% 96%, 8% 78%, 0 44%, 12% 15%);
+    transform: translate3d(calc(var(--portrait-x) * .35), calc(var(--portrait-y) * .35), -25px) rotateX(var(--portrait-tilt-x)) rotateY(var(--portrait-tilt-y));
+}
+.portrait-glass::before {
+    content: "";
+    position: absolute;
+    inset: 1rem;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 45% 55% 40% 60% / 38% 43% 57% 62%;
+}
+.portrait-aura {
+    position: absolute;
+    z-index: 2;
+    border-radius: 50%;
+    filter: blur(34px);
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+.portrait-aura--cyan {
+    right: 3%;
+    top: 17%;
+    width: 13rem;
+    height: 18rem;
+    background: rgba(0,229,255,.16);
+    transform: translate3d(calc(var(--portrait-x) * -.25), calc(var(--portrait-y) * .25), 0) rotate(18deg);
+}
+.portrait-aura--violet {
+    left: 8%;
+    bottom: 14%;
+    width: 16rem;
+    height: 12rem;
+    background: rgba(139,92,246,.2);
+    transform: translate3d(calc(var(--portrait-x) * .28), calc(var(--portrait-y) * -.22), 0) rotate(-14deg);
+}
+.portrait-figure {
+    position: relative;
+    z-index: 3;
+    width: min(34rem, 90%);
+    margin: 0;
+    transform: translate3d(var(--portrait-x), var(--portrait-y), 30px) rotateX(var(--portrait-tilt-x)) rotateY(var(--portrait-tilt-y));
+    filter: drop-shadow(0 34px 58px rgba(0,0,0,.45)) drop-shadow(0 0 24px rgba(95,208,255,.14));
+    animation: portraitFloat 6.5s ease-in-out infinite;
+    will-change: transform;
+}
+.portrait-figure::after {
+    content: "";
+    position: absolute;
+    inset: 3% 8% 0;
+    z-index: -1;
+    border-radius: 42% 58% 52% 48%;
+    background: linear-gradient(115deg, rgba(0,229,255,.16), rgba(139,92,246,.18));
+    filter: blur(28px);
+    opacity: .75;
+}
+.portrait-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    clip-path: polygon(50% 0, 83% 1%, 98% 13%, 100% 51%, 98% 91%, 87% 100%, 13% 100%, 1% 89%, 0 49%, 3% 12%, 18% 1%);
+}
+
 .hero-console { position: relative; min-height: 36rem; display: grid; place-items: center; perspective: 1000px; }
 .console-glow { position: absolute; width: 75%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,255,.16), rgba(139,92,246,.08) 35%, transparent 70%); filter: blur(25px); }
 .console-window { position: relative; width: min(100%, 31rem); overflow: hidden; border: 1px solid rgba(148,163,184,.2); border-radius: 18px; background: rgba(5,8,22,.83); box-shadow: 0 40px 100px rgba(0,0,0,.48), inset 0 1px rgba(255,255,255,.05); backdrop-filter: blur(20px); transform: rotateY(-5deg) rotateX(2deg); }
@@ -317,6 +420,8 @@ svg { display: block; fill: none; stroke: currentColor; stroke-linecap: round; s
 @keyframes heroMesh { from { background-position: 0 0; } to { background-position: 100% 70%; } }
 @keyframes gridDrift { to { background-position: 76px 76px; } }
 @keyframes auroraMove { from { transform: translate3d(-3%, -2%, 0) rotate(0); border-radius: 42% 58% 64% 36%; } to { transform: translate3d(12%, 9%, 0) rotate(18deg); border-radius: 62% 38% 42% 58%; } }
+@keyframes portraitFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -13px; } }
+@keyframes portraitHalo { from { scale: .98; rotate: -2deg; } to { scale: 1.05; rotate: 4deg; } }
 @keyframes profileFloat { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-11px) rotate(1deg); } }
 @keyframes profileSheen { 0%,55% { transform: rotate(30deg) translateX(-100%); } 85%,100% { transform: rotate(30deg) translateX(100%); } }
 @keyframes projectGlow { to { transform: translate(22%, 18%) scale(1.15); opacity: .55; } }
@@ -328,7 +433,7 @@ svg { display: block; fill: none; stroke: currentColor; stroke-linecap: round; s
     .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
     .hero { padding-top: 8rem; }
     .hero-copy { max-width: 50rem; }
-    .hero-console { min-height: 31rem; }
+    .hero-portrait { min-height: 34rem; }
     .profile-signature-card { left: 4%; }
     .hero-bottom { display: none; }
     .about-layout { gap: 3rem; }
@@ -368,7 +473,9 @@ svg { display: block; fill: none; stroke: currentColor; stroke-linecap: round; s
     .hero-grid { gap: 3rem; }
     .hero-intro { font-size: .84rem; }
     .hero-actions .button { width: 100%; }
-    .hero-console { min-height: 25rem; }
+    .hero-portrait { min-height: 31rem; }
+    .portrait-figure { width: min(28rem, 96%); }
+    .portrait-glass { width: min(24rem, 78%); }
     .profile-signature-card { top: -.5rem; left: 0; min-width: 15.5rem; }
     .console-window { transform: none; }
     .console-code { padding: 1rem .4rem; font-size: .6rem; }

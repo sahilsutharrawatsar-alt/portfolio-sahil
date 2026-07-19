@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPointer();
     initMagnetic();
     initTilt();
+    initHeroPortraitParallax();
 
     if (window.AOS) {
         AOS.init({ duration: 800, offset: 70, easing: 'ease-out-cubic', once: true, disable: reducedMotion });
@@ -50,8 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.registerPlugin(ScrollTrigger);
         gsap.from('.hero-reveal', { y: 34, opacity: 0, duration: 1, stagger: .11, ease: 'power3.out', delay: .12 });
         gsap.from('#hero-title .char', { yPercent: 115, opacity: 0, rotateX: -70, duration: .85, stagger: .015, ease: 'power4.out', delay: .35 });
-        gsap.from('.profile-signature-card', { x: 30, y: -20, opacity: 0, rotate: 4, duration: 1, ease: 'back.out(1.4)', delay: .85 });
-        gsap.to('.hero-console', { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+        gsap.to('.hero-portrait', { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
         gsap.to('.timeline-line i', { height: '100%', ease: 'none', scrollTrigger: { trigger: '.timeline', start: 'top 70%', end: 'bottom 75%', scrub: true } });
         gsap.utils.toArray('[data-parallax]').forEach((item) => {
             const amount = Number(item.dataset.parallax) * 700;
@@ -272,6 +272,29 @@ function initTilt() {
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
         card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+}
+
+function initHeroPortraitParallax() {
+    if (reducedMotion || window.matchMedia('(pointer: coarse)').matches) return;
+    const portrait = document.querySelector('[data-portrait-parallax]');
+    if (!portrait) return;
+
+    portrait.addEventListener('mousemove', (event) => {
+        const rect = portrait.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - .5;
+        const y = (event.clientY - rect.top) / rect.height - .5;
+        portrait.style.setProperty('--portrait-x', `${x * 22}px`);
+        portrait.style.setProperty('--portrait-y', `${y * 18}px`);
+        portrait.style.setProperty('--portrait-tilt-x', `${y * -3.5}deg`);
+        portrait.style.setProperty('--portrait-tilt-y', `${x * 4.5}deg`);
+    }, { passive: true });
+
+    portrait.addEventListener('mouseleave', () => {
+        portrait.style.setProperty('--portrait-x', '0px');
+        portrait.style.setProperty('--portrait-y', '0px');
+        portrait.style.setProperty('--portrait-tilt-x', '0deg');
+        portrait.style.setProperty('--portrait-tilt-y', '0deg');
     });
 }
 
