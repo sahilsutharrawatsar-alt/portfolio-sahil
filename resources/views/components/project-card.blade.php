@@ -48,8 +48,8 @@
                     <span>{{ $technology }}</span>
                 @endforeach
             </div>
-            <a href="{{ $project['url'] }}" target="_blank" rel="noreferrer" aria-label="Visit {{ $project['name'] }}">
-                View live
+            <a class="project-link" href="{{ $project['url'] }}" target="_blank" rel="noreferrer" aria-label="Visit {{ $project['name'] }}">
+                Live Demo
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
             </a>
         </div>

@@ -27,8 +27,9 @@
             <a href="#skills">Skills</a>
             <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
         </nav>
-        <a class="nav-cta magnetic" href="#contact"><span>Let’s talk</span><i></i></a>
+        <a class="nav-cta magnetic ripple-link" href="#contact"><span>Hire Me</span><i></i></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
             <span></span><span></span>
         </button>
@@ -47,24 +48,29 @@
         <div class="container hero-grid">
             <div class="hero-copy">
                 <div class="availability hero-reveal"><i></i> PHP Laravel Developer · 2.6+ years</div>
-                <p class="hero-kicker hero-reveal">Hi, I’m {{ $person['name'] }}</p>
+                <p class="hero-kicker hero-reveal">Hi, I'm</p>
                 <h1 id="hero-title" class="hero-reveal split-heading">
-                    I turn complex<br>
-                    requirements into<br>
-                    <span>reliable Laravel solutions.</span>
+                    Sahil<br>
+                    <span>Suthar</span>
                 </h1>
-                <p class="hero-intro hero-reveal">{{ $person['summary'] }}</p>
+                <p class="hero-role hero-reveal">I build <strong id="typed-role">PHP Laravel Developer</strong><i></i></p>
+                <p class="hero-intro hero-reveal">I’m a PHP Laravel Developer with 2.6+ years of production experience building scalable applications, REST APIs, payment gateway workflows, MySQL-backed systems, and clean backend architecture. I focus on problem solving, maintainable code, and production-ready development that supports real business operations.</p>
                 <div class="hero-specialties hero-reveal" aria-label="Primary specialities">
-                    <span>Backend Development</span>
+                    <span>Laravel</span>
+                    <span>PHP</span>
                     <span>REST APIs</span>
-                    <span>MySQL Optimization</span>
+                    <span>Payment Gateway</span>
+                    <span>MySQL</span>
+                    <span>Clean Code</span>
                 </div>
                 <div class="hero-actions hero-reveal">
-                    <a class="button button--primary magnetic" href="{{ asset('assets/Sahil-Suthar-Resume.pdf') }}" download>
-                        Download résumé
+                    <a class="button button--primary magnetic ripple-link" href="{{ asset('assets/Sahil-Suthar-Resume.pdf') }}" download>
+                        Download Resume
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v13m0 0 5-5m-5 5-5-5M5 21h14"/></svg>
                     </a>
-                    <a class="button button--ghost magnetic" href="#projects">Explore projects</a>
+                    <a class="button button--glass magnetic ripple-link" href="#projects">View Projects</a>
+                    <a class="button button--ghost magnetic ripple-link" href="#contact">Hire Me</a>
+                    <a class="button button--text magnetic" href="mailto:{{ $person['email'] }}">Contact Me</a>
                 </div>
             </div>
             <div class="hero-portrait hero-reveal" data-parallax="0.035" data-portrait-parallax>
@@ -73,14 +79,16 @@
                 <div class="portrait-aura portrait-aura--cyan" aria-hidden="true"></div>
                 <div class="portrait-aura portrait-aura--violet" aria-hidden="true"></div>
                 <figure class="portrait-figure">
-                    <img src="{{ asset('assets/images/hero-portrait.png') }}" alt="Portrait of Sahil Suthar">
+                    <img src="{{ asset('assets/images/hero-portrait.png') }}" alt="Portrait of Sahil Suthar" loading="eager" decoding="async">
                 </figure>
+                <div class="portrait-badge portrait-badge--top">2.6+ Years</div>
+                <div class="portrait-badge portrait-badge--bottom">Production Ready</div>
             </div>
         </div>
         <div class="hero-bottom container">
             <span>Explore my journey</span>
             <div class="scroll-line"><i></i></div>
-            <p class="typing-wrap">My focus: <strong id="typed-role">Laravel Development</strong><i></i></p>
+            <p class="typing-wrap">Available for Laravel work <i></i></p>
         </div>
     </section>
 
@@ -220,9 +228,26 @@
             <p class="eyebrow"><span>07 / Contact</span></p>
             <h2>Looking for a Laravel developer<br><span>who understands the complete workflow?</span></h2>
             <p>I’m open to discussing Laravel development, backend systems, APIs, integrations, maintenance, and roles where dependable delivery matters.</p>
-            <div class="contact-actions">
-                <a class="button button--primary magnetic" href="mailto:{{ $person['email'] }}?subject=Laravel%20project%20enquiry">Email me <span>↗</span></a>
-                <a class="button button--ghost magnetic" href="tel:{{ $person['phone_href'] }}">Call {{ $person['phone'] }}</a>
+            <div class="contact-panel">
+                <form class="contact-form" action="mailto:{{ $person['email'] }}" method="post" enctype="text/plain">
+                    <label>
+                        <span>Name</span>
+                        <input type="text" name="name" placeholder="Your name" autocomplete="name">
+                    </label>
+                    <label>
+                        <span>Email</span>
+                        <input type="email" name="email" placeholder="you@example.com" autocomplete="email">
+                    </label>
+                    <label class="contact-form__wide">
+                        <span>Message</span>
+                        <textarea name="message" rows="5" placeholder="Tell me about your Laravel project"></textarea>
+                    </label>
+                    <button class="button button--primary magnetic ripple-link" type="submit">Send Message <span>↗</span></button>
+                </form>
+                <div class="contact-actions">
+                    <a class="button button--glass magnetic ripple-link" href="mailto:{{ $person['email'] }}?subject=Laravel%20project%20enquiry">Email me <span>↗</span></a>
+                    <a class="button button--ghost magnetic ripple-link" href="tel:{{ $person['phone_href'] }}">Call {{ $person['phone'] }}</a>
+                </div>
             </div>
             <div class="contact-details">
                 <a href="mailto:{{ $person['email'] }}">{{ $person['email'] }}</a>

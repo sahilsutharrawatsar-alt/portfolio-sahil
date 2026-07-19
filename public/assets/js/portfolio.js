@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initSkillMeters();
     initSpotlight();
     initProjectLighting();
+    initActiveNav();
+    initRipples();
     splitHeadings();
     initPointer();
     initMagnetic();
@@ -88,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initTyping() {
     const target = document.querySelector('#typed-role');
     if (!target) return;
-    const roles = ['Laravel Development', 'Backend Engineering', 'REST API Development', 'Database Optimization'];
+    const roles = ['PHP Laravel Developer', 'Backend Engineer', 'REST API Developer', 'Full Stack Developer'];
     let role = 0;
     let character = roles[0].length;
     let deleting = true;
@@ -189,12 +191,41 @@ function initSpotlight() {
 
 function initProjectLighting() {
     if (window.matchMedia('(pointer: coarse)').matches) return;
-    document.querySelectorAll('.project-card').forEach((card) => {
+    document.querySelectorAll('.project-card, .skill-card, .timeline-card, .services-grid article').forEach((card) => {
         card.addEventListener('mousemove', (event) => {
             const rect = card.getBoundingClientRect();
             card.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
             card.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
         });
+    });
+}
+
+function initActiveNav() {
+    const links = document.querySelectorAll('.desktop-nav a[href^="#"]');
+    if (!links.length) return;
+    const sections = Array.from(links)
+        .map((link) => document.querySelector(link.getAttribute('href')))
+        .filter(Boolean);
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            links.forEach((link) => {
+                link.classList.toggle('is-active', link.getAttribute('href') === `#${entry.target.id}`);
+            });
+        });
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+
+    sections.forEach((section) => observer.observe(section));
+}
+
+function initRipples() {
+    document.querySelectorAll('.ripple-link, .button').forEach((item) => {
+        item.addEventListener('pointermove', (event) => {
+            const rect = item.getBoundingClientRect();
+            item.style.setProperty('--ripple-x', `${event.clientX - rect.left}px`);
+            item.style.setProperty('--ripple-y', `${event.clientY - rect.top}px`);
+        }, { passive: true });
     });
 }
 
